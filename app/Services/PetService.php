@@ -59,4 +59,15 @@ class PetService
             'data' => $response->json()
         ];
     }
+
+    public function updatePet(array $data): array
+    {
+        $response = Http::withHeaders(['api_key' => $this->apiKey])
+                        ->put($this->apiUrl, $data);
+
+        return [
+            'status' => $response->status(),
+            'data' => $response->json()
+        ];
+    }
 }

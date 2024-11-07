@@ -32,7 +32,7 @@
                         <label for="tags">Tagi</label>
                         <input type="text" name="tags[0][name]" class="form-control">
                     </div>
-                    <button type="submit" class="btn btn-primary">Zapisz Zmiany</button>
+                    <button type="submit mt-3" class="btn btn-primary">Zapisz Zmiany</button>
                 </form>
             </div>
         </div>

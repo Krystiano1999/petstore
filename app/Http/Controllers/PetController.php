@@ -45,4 +45,11 @@ class PetController extends Controller
         $response = $this->petService->createPet($request->validated());
         return response()->json($response);
     }
+
+    // Aktualizowanie zwierzaka
+    public function update(PetUpdateRequest $request): JsonResponse
+    {
+        $response = $this->petService->updatePet($request->validated());
+        return response()->json($response);
+    }
 }

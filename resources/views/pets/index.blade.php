@@ -25,7 +25,6 @@
 
     @include('pets.modals.create')
     @include('pets.modals.edit')
-    @include('pets.modals.upload_image')
 @endsection
 
 @push('scripts')

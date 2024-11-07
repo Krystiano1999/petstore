@@ -202,6 +202,90 @@ $(document).ready(function () {
     });
 
 
+    $(document).on('click', '.edit-pet', function () {
+        const petId = $(this).data('id');
+
+        $.ajax({
+            url: `/pets/${petId}`,
+            method: 'GET',
+            success: function (response) {
+                if (response.status === 200) {
+                    const pet = response.data;
+
+                    $('#editPetForm input[name="id"]').val(pet.id);
+                    $('#editPetForm input[name="name"]').val(pet.name);
+                    $('#editPetForm input[name="category[name]"]').val(pet.category?.name || '');
+                    $('#editPetForm select[name="status"]').val(pet.status);
+                    $('#editPetForm input[name="photoUrls[]"]').val(pet.photoUrls?.[0] || '');
+                    $('#editPetForm input[name="tags[0][name]"]').val(pet.tags?.[0]?.name || '');
+
+                    $('#editPetModal').modal('show');
+                } else {
+                    toastr.error('Nie udało się pobrać danych zwierzaka do edycji.');
+                }
+            },
+            error: function () {
+                toastr.error("Wystąpił błąd podczas pobierania danych zwierzaka.");
+            }
+        });
+    });
+
+
+
+    $('#editPetForm').on('submit', function (e) {
+        e.preventDefault();
+
+        const petId = $('#editPetForm input[name="id"]').val();
+        const formData = $(this).serializeArray();
+        const data = {};
+
+        formData.forEach(item => {
+            if (item.name.includes("category")) {
+                data['category'] = { name: item.value };
+            } else if (item.name.includes("tags")) {
+                data['tags'] = [{ name: item.value }];
+            } else if (item.name.includes("photoUrls")) {
+                data['photoUrls'] = [item.value];
+            } else {
+                data[item.name] = item.value;
+            }
+        });
+
+        $.ajax({
+            url: `/pets/${petId}`,
+            method: 'PUT',
+            contentType: 'application/json',
+            data: JSON.stringify(data),
+            success: function (response) {
+                if (response.status === 200) {
+                    toastr.success("Zwierzę zostało pomyślnie zaktualizowane!");
+                    $('#editPetModal').modal('hide');
+                    fetchPetsByStatus($('#status').val()); 
+                } else {
+                    toastr.error(response.data.message || 'Wystąpił błąd podczas aktualizacji zwierzaka.');
+                }
+            },
+            error: function () {
+                toastr.error("Wystąpił błąd podczas aktualizacji zwierzaka.");
+            }
+        });
+    });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     fetchPetsByStatus('available');
 
 

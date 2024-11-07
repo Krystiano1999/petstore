@@ -2,7 +2,7 @@ REST API - Laravel Napisz aplikację komunikującą się z przykładowym REST AP
 umożliw 
 v- dodawanie, 
 v- pobieranie, 
-edycję i
+v- edycję i
 v- usuwanie elementów w zasobie /pet. 
 
 Od strony użytkownika zrób prosty interfejs z formularzami. Obsłuż błędy. Proszę o podesłanie linka (Github) z rozwiązaniem w mailu zwrotnym.
