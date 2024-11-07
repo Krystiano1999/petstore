@@ -146,9 +146,16 @@ $(document).ready(function () {
         $.ajax({
             url: `/pets/${petId}`,
             method: 'DELETE',
-            success: function () {
-                toastr.success("Zwierzę zostało usunięte.");
-                fetchPetsByStatus($('#status').val());
+            success: function (response) {
+                if(response.status === 200){
+                    toastr.success("Zwierzę zostało usunięte.");
+                    fetchPetsByStatus($('#status').val());
+                }else if (response.status === 404) {
+                    toastr.error('Zwierzę o podanym ID nie zostało znalezione.');
+                } else if (response.status === 400) {
+                    toastr.error('Nieprawidłowe ID zwierzęcia.');
+                }
+                
             },
             error: function (xhr, status, error) {
                 toastr.error("Nie udało się usunąć zwierzęcia.");
