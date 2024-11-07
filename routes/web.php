@@ -12,4 +12,5 @@ Route::prefix('pets')->group(function () {
     Route::get('/status', [PetController::class, 'findByStatus']);
     Route::get('/{petId}', [PetController::class, 'findById'])->where('petId', '[0-9]+');
     Route::delete('/{petId}', [PetController::class, 'destroy']);
+    Route::post('/', [PetController::class, 'createPet']);
 });

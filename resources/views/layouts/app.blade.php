@@ -13,6 +13,8 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="#">Pet Store</a>
+        <button id="addPetButton" class="btn btn-primary">Dodaj zwierza</button>
+
     </nav>
 
     <div class="container mt-4">

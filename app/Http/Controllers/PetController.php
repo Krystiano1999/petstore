@@ -38,4 +38,11 @@ class PetController extends Controller
         $response = $this->petService->deletePet($petId);
         return response()->json($response);
     }
+
+    // Dodawanie zwierzaka
+    public function createPet(PetCreateRequest $request): JsonResponse
+    {
+        $response = $this->petService->createPet($request->validated());
+        return response()->json($response);
+    }
 }

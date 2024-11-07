@@ -31,7 +31,7 @@
                         <label for="tags">Tagi</label>
                         <input type="text" name="tags[0][name]" class="form-control">
                     </div>
-                    <button type="submit" class="btn btn-primary">Dodaj Zwierzę</button>
+                    <button type="submit" class="btn btn-primary mt-2">Dodaj Zwierzę</button>
                 </form>
             </div>
         </div>

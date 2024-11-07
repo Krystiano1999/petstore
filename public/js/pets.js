@@ -157,6 +157,51 @@ $(document).ready(function () {
         });
     }
 
+    $('#addPetButton').on('click', function () {
+        $('#createPetModal').modal('show');
+    });
+
+
+    $('#createPetForm').on('submit', function (e) {
+        e.preventDefault(); 
+
+        const formData = $(this).serializeArray();
+        const data = {};
+
+        formData.forEach(item => {
+            if (item.name.includes("category")) {
+                data['category'] = { name: item.value };
+            } else if (item.name.includes("tags")) {
+                data['tags'] = [{ name: item.value }];
+            } else if (item.name.includes("photoUrls")) {
+                data['photoUrls'] = [item.value];
+            } else {
+                data[item.name] = item.value;
+            }
+        });
+
+        $.ajax({
+            url: '/pets',
+            method: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify(data),
+            success: function (response) {
+                if (response.status === 200) {
+                    toastr.success("Zwierzę zostało pomyślnie dodane!");
+                    $('#createPetModal').modal('hide'); 
+                    $('#createPetForm')[0].reset(); 
+                    fetchPetsByStatus($('#status').val()); 
+                } else {
+                    toastr.error(response.data.message || 'Wystąpił błąd podczas dodawania zwierzaka.');
+                }
+            },
+            error: function (xhr) {
+                toastr.error("Wystąpił błąd podczas dodawania zwierzaka.");
+            }
+        });
+    });
+
+
     fetchPetsByStatus('available');
 
 
