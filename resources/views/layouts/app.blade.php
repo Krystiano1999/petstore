@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="{{ asset('css/toastr.min.css') }}">
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="px-5 navbar navbar-expand-lg navbar-light bg-light justify-content-between">
         <a class="navbar-brand" href="#">Pet Store</a>
         <button id="addPetButton" class="btn btn-primary">Dodaj zwierza</button>
 
