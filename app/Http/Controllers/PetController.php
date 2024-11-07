@@ -31,4 +31,11 @@ class PetController extends Controller
         $response = $this->petService->findByStatus($request->validated()['status']);
         return response()->json($response);
     }
+
+    // Usuwanie zwierzaka
+    public function destroy(int $petId): JsonResponse
+    {
+        $response = $this->petService->deletePet($petId);
+        return response()->json($response);
+    }
 }

@@ -21,7 +21,10 @@ class PetService
         $response = Http::withHeaders(['api_key' => $this->apiKey])
                         ->get("{$this->apiUrl}/{$petId}");
 
-        return $response->json();
+        return [
+            'status' => $response->status(),
+            'data' => $response->json()
+        ];
     }
 
     public function findByStatus(string $status): array
@@ -29,6 +32,20 @@ class PetService
         $response = Http::withHeaders(['api_key' => $this->apiKey])
                         ->get("{$this->apiUrl}/findByStatus", ['status' => $status]);
 
-        return $response->json();
+        return [
+            'status' => $response->status(),
+            'data' => $response->json()
+        ];
+    }
+
+    public function deletePet(int $petId): array
+    {
+        $response = Http::withHeaders(['api_key' => $this->apiKey])
+                        ->delete("{$this->apiUrl}/{$petId}");
+
+        return [
+            'status' => $response->status(),
+            'data' => $response->json()
+        ];
     }
 }
